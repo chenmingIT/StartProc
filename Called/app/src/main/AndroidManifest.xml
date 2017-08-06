@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.study.called">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.study.called.intent.main"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".CalledService"
+            android:enabled="true"
+            android:exported="true"
+            android:process="com.study.called.calledService">
+        </service>
+
+        <receiver
+            android:name=".CalledSysReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:process="com.study.called.calledSysReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_MOUNTED"/>
+                <action android:name="android.intent.action.MEDIA_UNMOUNTED"/>
+
+                <data android:scheme="file"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".CalledThirdReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:process="com.study.called.calledThirdReceiver">
+            <intent-filter>
+                <action android:name="com.study.called.thirdBrAction"/>
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name=".CalledContentProvider"
+            android:authorities="com.study.called.contentprovide"
+            android:enabled="true"
+            android:exported="true"
+            android:process="com.study.called.calledContentProvider">
+        </provider>
+
+        <service
+            android:name=".CalledJobService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process="com.study.called.jobservice">
+        </service>
+    </application>
+
+</manifest>
